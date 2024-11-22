@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Rutas de los archivos
+
 ASM_PATH="asm_functions"
 OBJ_PATH="objects"
 C_PATH="c_functions"
