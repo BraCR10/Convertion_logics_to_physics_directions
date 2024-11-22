@@ -19,11 +19,11 @@ int main() {
 
         switch(option){
             case 1:
+                system("clear");
                 printf("You have selected memory paging\n");
                 int pageSize=-1;
                 int virtualAddress=-1;
                 int frameNumber=-1;
-                system("clear");
                 //Asking for the page size and the virtual address and validating the input
                 do {
                     printf("Please enter the page size in byte (B): ");
@@ -65,7 +65,7 @@ int main() {
                 printf("You have selected block allocation\n");
                 break;
             default:
-                printf("Invalid option\n");
+                system("clear");
                 return 0;
         }
         
