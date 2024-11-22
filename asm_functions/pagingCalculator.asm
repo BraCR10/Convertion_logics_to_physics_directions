@@ -9,7 +9,7 @@ segment .text
 
 global memoryAddressCalculator
 global pageNumberCalculator
-
+global segmentationFault
 ; Function: calculate the real memory address from the virtual address
 memoryAddressCalculator:
     enter 0, 0
@@ -41,3 +41,29 @@ pageNumberCalculator:
     .exit:
         leave
         ret
+
+;Function: detect segmentation fault
+segmentationFault:
+    enter 0, 0
+    sub edx, edx
+    mov eax,[ebp+8];page number
+    mul dword [ebp+16];page size
+    cmp edx,0;check if the result is more than 32 bits
+    jne .exitError;if it is more than 32 bits, then exit the function
+
+    add eax,[offset];add the offset to the result
+    cmp eax,[ebp+12];if the result is more than the procces size
+    jle .exit;then exit the function
+    jmp .exitIncorrect;if it is not more than the procces size, then continue
+   
+    .exit:
+    mov eax,1 ; correct
+    leave
+    ret
+    .exitIncorrect:
+    mov eax,0 ; incorrect
+    leave
+    ret
+    .exitError:
+    mov eax,-1 ; error
+   
