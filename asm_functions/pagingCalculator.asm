@@ -3,15 +3,15 @@ segment .data
                 ; in the last page to get the exact memory address
                 ; this offset is the residue of the division in the 
                 ; pageNumberCalculator function and then will be use
-                ; in the memoryAddressCalculator function to return the
+                ; in the memoryAddressPagingCalculator function to return the
                 ; exact memory address
 segment .text
 
-global memoryAddressCalculator
+global memoryAddressPagingCalculator
 global pageNumberCalculator
 global segmentationFault
 ; Function: calculate the real memory address from the virtual address
-memoryAddressCalculator:
+memoryAddressPagingCalculator:
     enter 0, 0
     sub edx, edx ; it will store the residue of the division
 
